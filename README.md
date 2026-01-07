@@ -24,15 +24,13 @@ arXiv preprint, 2026
 
 ## Overview
 
-We propose **Cardinality Augmented Loss Functions**, a class of loss functions designed to explicitly incorporate class cardinality information in order to address class imbalance during neural network training.
+We propose **Cardinality Augmented Loss Functions**, implementations of cardinality-like invariants such as magnitude and the spread, in pursuit of improving results for training neural networks with class imbalance.
 
 This repository contains code necessary to reproduce the experiments and results reported in the paper.
 
 ---
 
 ## Basic Usage
-
-To reproduce the results from the paper:
 
 ```bash
 git clone https://github.com/miguelomalley/CardLoss.git
@@ -52,7 +50,7 @@ This project is licensed under the MIT License.
 
 This work builds upon several existing tools and prior research:
 
-* **Synthetic dataset generation** is based on the work of Guyon et al. and the implementation provided by the `make_classification` function in *scikit-learn*
+* Our synthetic dataset generation is based on the work of Guyon et al. and utilizes the implementation provided by the `make_classification` function in *scikit-learn*
 
   > Guyon, I., Gunn, S., Nikravesh, M., & Zadeh, L. A. (2006). *Feature Extraction: Foundations and Applications*. Springer.
   > Pedregosa et al. (2011). *Scikit-learn: Machine Learning in Python*. JMLR.
@@ -72,6 +70,4 @@ This work builds upon several existing tools and prior research:
       doi ={https://doi.org/10.1016/j.actamat.2025.121509}, 
 }
 ```
-
-We gratefully acknowledge the authors of these works for making their code and methodologies publicly available.
 
