@@ -15,7 +15,7 @@ arXiv preprint, 2026
 @article{omalley2026cardinality,
   title   = {Cardinality Augmented Loss Functions},
   author  = {O'Malley, Miguel},
-  journal = {arXiv preprint arXiv:XXXX.XXXXX},
+  journal = {arXiv preprint arXiv:2601.04941},
   year    = {2026}
 }
 ```
