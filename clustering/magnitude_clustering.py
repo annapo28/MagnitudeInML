@@ -6,7 +6,6 @@ class MagnitudeClusterer:
     """
     Кластеризация через магнитуду (адаптированный алгоритм из диссертации Андреевой)
     """
-    
     def __init__(self, t=1.0, threshold=None):
         self.t = t
         self.threshold = threshold
@@ -14,32 +13,27 @@ class MagnitudeClusterer:
     
     def fit(self, X):
         n = X.shape[0]
-        R = set(range(n))  # оставшиеся точки
-        C = [{0}]          # начальный кластер с первой точкой
+        R = set(range(n))  
+        C = [{0}]          
         R.remove(0)
         
-        # Автоматический выбор порога при необходимости
         if self.threshold is None:
-            # Используем медиану изменения магнитуды при добавлении случайных точек
             samples = min(20, n)
             changes = []
             for _ in range(samples):
                 i = np.random.choice(list(R)) if R else 0
                 j = np.random.choice(list(range(n)))
                 Z = np.exp(-self.t * np.linalg.norm(X[i] - X[j]))
-                changes.append(1.0 - Z)  # приближённое изменение магнитуды
+                changes.append(1.0 - Z) 
             self.threshold = np.median(changes) if changes else 0.1
         
-        # Основной цикл кластеризации
         while R:
             best_increase = float('inf')
             best_point = None
             best_cluster = None
             
-            # Ищем точку с минимальным увеличением магнитуды при добавлении к кластеру
             for b in R:
                 for c_idx, c in enumerate(C):
-                    # Приближённая оценка изменения магнитуды
                     points_in_cluster = np.array(list(c))
                     if len(points_in_cluster) > 0:
                         avg_dist = np.mean(np.linalg.norm(X[b] - X[points_in_cluster], axis=1))
@@ -52,7 +46,6 @@ class MagnitudeClusterer:
                         best_point = b
                         best_cluster = c_idx
             
-            # Решаем: добавить к существующему кластеру или создать новый
             if best_increase < self.threshold and best_cluster is not None:
                 C[best_cluster].add(best_point)
             else:
@@ -60,7 +53,6 @@ class MagnitudeClusterer:
             
             R.remove(best_point)
         
-        # Формируем метки кластеров
         self.labels_ = np.zeros(n, dtype=int)
         for label, cluster in enumerate(C):
             for idx in cluster:

@@ -27,18 +27,16 @@ def block_diagonality_score(Z, threshold=0.1):
     Возвращает долю веса в "диагональных блоках" относительно полной матрицы.
     """
     n = Z.shape[0]
-    # Сортируем точки по первой координате для приближённого выявления блоков
     sorted_idx = np.argsort(np.sum(Z, axis=1))
     Z_sorted = Z[sorted_idx][:, sorted_idx]
     
-    # Делим матрицу на блоки размером ~20% от диагонали
     block_size = max(10, n // 5)
     diagonal_weight = 0.0
     total_weight = np.sum(Z_sorted)
     
     for i in range(0, n, block_size):
         for j in range(0, n, block_size):
-            if abs(i - j) < block_size * 1.5:  # учитываем соседние блоки
+            if abs(i - j) < block_size * 1.5: 
                 block = Z_sorted[i:min(i+block_size, n), j:min(j+block_size, n)]
                 diagonal_weight += np.sum(block)
     

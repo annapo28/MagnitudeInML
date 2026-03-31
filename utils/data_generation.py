@@ -21,11 +21,10 @@ def generate_moon_clusters(n_points=500, noise=0.1, random_state=42):
 def generate_hierarchical_clusters(n_points=1000, random_state=42):
     """Генерация иерархических кластеров для тестирования блочно-диагональной структуры"""
     np.random.seed(random_state)
-    # 3 крупных кластера, каждый содержит 2 подкластера
     centers = np.array([
-        [-5, -5], [-4, -4],  # кластер 1
-        [0, 0], [1, 1],      # кластер 2
-        [5, 5], [6, 6]       # кластер 3
+        [-5, -5], [-4, -4],  
+        [0, 0], [1, 1],     
+        [5, 5], [6, 6]     
     ])
     stds = [0.5, 0.5, 0.3, 0.3, 0.7, 0.7]
     n_per_cluster = n_points // len(centers)
@@ -35,6 +34,6 @@ def generate_hierarchical_clusters(n_points=1000, random_state=42):
     for i, (center, std) in enumerate(zip(centers, stds)):
         cluster_points = np.random.normal(loc=center, scale=std, size=(n_per_cluster, 2))
         X.append(cluster_points)
-        y.extend([i // 2] * n_per_cluster)  # 2 подкластера → 1 метка
-    
+        y.extend([i // 2] * n_per_cluster) 
+        
     return np.vstack(X), np.array(y)
