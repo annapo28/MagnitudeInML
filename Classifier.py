@@ -279,6 +279,4 @@ class PowerClassifierABS(PowerClassifier):
     def __init__(self, tol=1e-3):
         super().__init__(abs_val, tol)
 
-
-# Алиасы для обратной совместимости
 TSNE_Classifier = WeightClassifierCDF
